@@ -1,0 +1,9 @@
+# MySQL ConfigMap
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: db-config
+  namespace: fullstack
+data:
+  DB_URL: "jdbc:mysql://mysql-service:3306/myappdb"
+  mysql_database: "myappdb"
