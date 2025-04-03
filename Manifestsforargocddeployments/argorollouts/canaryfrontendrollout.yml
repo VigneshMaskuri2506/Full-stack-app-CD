@@ -1,0 +1,41 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
+metadata:
+  name: frontend-rollout
+  namespace: fullstack
+spec:
+  replicas: 2ro  # Number of pods in both versions
+  strategy:
+    canary:
+      steps:
+      - setWeight: 20  # 20% traffic to v2 initially
+      - pause: {duration: 60s}  # Wait for 60 seconds before increasing
+      - setWeight: 50  # 50% traffic to v2 after pause
+      - pause: {duration: 60s}
+      - setWeight: 100  # Switch 100% traffic to v2 after successful checks
+  selector:
+    matchLabels:
+      app: frontend  # ✅ Selector points to the frontend pods
+  template:
+    metadata:
+      labels:
+        app: frontend
+        version: v2  # Canary version or updated version
+    spec:
+      containers:
+      - name: frontend
+        image: harshakoppu945/canaryfrontendimage  # New version for canary
+        ports:
+        - containerPort: 80
+        livenessProbe:  # ✅ Liveness probe to check container health
+          httpGet:
+            path: /health
+            port: 80
+          initialDelaySeconds: 5
+          periodSeconds: 10
+        readinessProbe:  # ✅ Readiness probe to check container readiness
+          httpGet:
+            path: /ready
+            port: 80
+          initialDelaySeconds: 5
+          periodSeconds: 10
