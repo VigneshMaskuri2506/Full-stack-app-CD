@@ -1,0 +1,4 @@
+resources:
+  - backenddeployment.yml
+  - backendhpa.yml
+  - backendservice.yml
