@@ -21,7 +21,7 @@ spec:
     spec:
       containers:
         - name: backend
-          image: harshakoppu945/backend:v12  #Put your image generated for backend here
+          image: harshakoppu945/backend:v12  # Your backend image
           resources:
             requests:
               cpu: 300m
@@ -29,6 +29,22 @@ spec:
             limits:
               cpu: 1
               memory: 1Gi
+          env:
+            - name: SPRING_DATASOURCE_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: db-config
+                  key: DB_URL
+            - name: SPRING_DATASOURCE_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: db-secrets
+                  key: mysql_user
+            - name: SPRING_DATASOURCE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: db-secrets
+                  key: mysql_password
           livenessProbe:
             httpGet:
               path: /health
