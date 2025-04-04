@@ -1,12 +1,10 @@
-#Storage class for EBS volumeMounts
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
 metadata:
-  name: ebs-sc  #  Matches the storageClassName in PVC
-  namespace: fullstack
-provisioner: ebs.csi.aws.com  #  EBS CSI Driver for AWS
+  name: ebs-sc
+provisioner: ebs.csi.aws.com
 parameters:
-  type: gp3  # or gp2 based on your requirement
+  type: gp3
   fsType: ext4
 volumeBindingMode: WaitForFirstConsumer
 allowVolumeExpansion: true
