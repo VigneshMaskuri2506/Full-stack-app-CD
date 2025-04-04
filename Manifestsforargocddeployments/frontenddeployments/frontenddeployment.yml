@@ -21,7 +21,7 @@ spec:
     spec:
       containers:
         - name: frontend
-          image: harshakoppu945/frontend:latest   #Put your frontend image here
+          image: harshakoppu945/frontend:v12   #Put your frontend image here
           resources:
             requests:
               cpu: 200m
