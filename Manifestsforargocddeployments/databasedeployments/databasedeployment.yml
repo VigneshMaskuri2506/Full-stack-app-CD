@@ -1,4 +1,4 @@
-# MySQL Deployment
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -17,30 +17,30 @@ spec:
         app: mysql
     spec:
       containers:
-      - name: mysql
-        image: mysql:5.7   #Image directly taken from predefined docker registry images
-        ports:
-        - containerPort: 3306
-        env:
-        - name: MYSQL_DATABASE
-          valueFrom:
-            configMapKeyRef:
-              name: db-config
-              key: mysql_database
-        - name: MYSQL_USER
-          valueFrom:
-            secretKeyRef:
-              name: db-secrets
-              key: mysql_user
-        - name: MYSQL_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: db-secrets
-              key: mysql_password
-        volumeMounts:
-        - name: mysql-persistent-storage
-          mountPath: /var/lib/mysql
+        - name: mysql
+          image: mysql:5.7
+          ports:
+            - containerPort: 3306
+          env:
+            - name: DB_URL
+              valueFrom: null
+              configMapKeyRef:
+                name: db-config
+                key: DB_URL
+            - name: MYSQL_USER
+              valueFrom:
+                secretKeyRef:
+                  name: db-secrets
+                  key: mysql_user
+            - name: MYSQL_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: db-secrets
+                  key: mysql_password
+          volumeMounts:
+            - name: mysql-persistent-storage
+              mountPath: /var/lib/mysql
       volumes:
-      - name: mysql-persistent-storage
-        persistentVolumeClaim:
-          claimName: mysql-pvc
+        - name: mysql-persistent-storage
+          persistentVolumeClaim:
+            claimName: mysql-pvc
