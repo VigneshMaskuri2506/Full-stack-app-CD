@@ -1,7 +1,7 @@
 resources:
   - databsedeployment.yml
   - databaseservice.yml
-  - dbconfig.yml
+  - dbconfigmap.yml
   - dbsecrets.yml
   - ebsstorageclass.yml
   - persistancevolumeclaim.yml
