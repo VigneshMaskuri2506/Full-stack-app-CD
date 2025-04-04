@@ -1,5 +1,5 @@
 resources:
-  - databsedeployment.yml
+  - databasedeployment.yml
   - databaseservice.yml
   - dbconfigmap.yml
   - dbsecrets.yml
