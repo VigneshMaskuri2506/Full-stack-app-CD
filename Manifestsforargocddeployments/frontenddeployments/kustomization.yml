@@ -1,0 +1,5 @@
+resources:
+  - frontendeployment.yml
+  - frontendhpa.yml
+  - frontendservice.yml
+  
