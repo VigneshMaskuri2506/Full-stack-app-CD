@@ -21,7 +21,7 @@ spec:
     spec:
       containers:
         - name: backend
-          image: harshakoppu945/backend:v12  # Your backend image
+          image: harshakoppu945/fsbackend:latest  # Your backend image
           resources:
             requests:
               cpu: 300m
