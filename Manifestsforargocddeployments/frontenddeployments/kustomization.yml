@@ -2,4 +2,3 @@ resources:
   - frontenddeployment.yml
   - frontendhpa.yml
   - frontendservice.yml
-  
