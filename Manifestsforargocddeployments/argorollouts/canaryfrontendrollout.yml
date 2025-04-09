@@ -4,7 +4,9 @@ metadata:
   name: frontend-rollout
   namespace: fullstack
 spec:
-  replicas: 2ro  # Number of pods in both versions
+  replicas: 2                  # Number of pods in both versions
+  revisionHistoryLimit: 2      #To avoid resource leaks of old ReplicaSets:       
+  progressDeadlineSeconds: 600   #Defines how long Argo should wait before marking the rollout as failed:
   strategy:
     canary:
       steps:
