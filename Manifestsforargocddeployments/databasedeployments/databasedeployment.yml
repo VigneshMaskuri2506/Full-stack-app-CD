@@ -1,4 +1,3 @@
----
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -18,15 +17,15 @@ spec:
     spec:
       containers:
         - name: mysql
-          image: mysql:5.7
+          image: mysql:8.0  # You can use mysql:5.7 or a lighter MySQL version
           ports:
             - containerPort: 3306
           env:
             - name: DB_URL
-              valueFrom: null
-              configMapKeyRef:
-                name: db-config
-                key: mysql_database
+              valueFrom:
+                configMapKeyRef:
+                  name: db-config
+                  key: mysql_database
             - name: MYSQL_USER
               valueFrom:
                 secretKeyRef:
@@ -44,3 +43,10 @@ spec:
         - name: mysql-persistent-storage
           persistentVolumeClaim:
             claimName: mysql-pvc
+      resources:
+        requests:
+          memory: "2Gi"
+          cpu: "1"
+        limits:
+          memory: "4Gi"
+          cpu: "2"
