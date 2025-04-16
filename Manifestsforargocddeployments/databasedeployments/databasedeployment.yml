@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: mysql
-          image: mysql:8.0  # You can use mysql:5.7 or a lighter MySQL version
+          image: mysql:8.0
           ports:
             - containerPort: 3306
           env:
@@ -36,15 +36,20 @@ spec:
                 secretKeyRef:
                   name: db-secrets
                   key: mysql_password
-            - name: MYSQL_ROOT_PASSWORD  # Adding the root password here
+            - name: MYSQL_ROOT_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: db-secrets  # You can also define the password in the secret
-                  key: mysql_root_password  # Add the root password key to your secret
+                  name: db-secrets
+                  key: mysql_root_password
           volumeMounts:
+            - name: mysql-initdb
+              mountPath: /docker-entrypoint-initdb.d
             - name: mysql-persistent-storage
               mountPath: /var/lib/mysql
       volumes:
+        - name: mysql-initdb
+          configMap:
+            name: mysql-init-script
         - name: mysql-persistent-storage
           persistentVolumeClaim:
             claimName: mysql-pvc
