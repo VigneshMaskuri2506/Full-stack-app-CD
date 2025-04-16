@@ -5,3 +5,4 @@ resources:
   - dbsecrets.yml
   - ebsstorageclass.yml
   - persistancevolumeclaim.yml
+  - mysql-init-script.yml
