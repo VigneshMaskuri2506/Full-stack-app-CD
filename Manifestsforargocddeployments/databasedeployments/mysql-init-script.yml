@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mysql-init-script
+  namespace: fullstack
+data:
+  init.sql: |
+    CREATE DATABASE IF NOT EXISTS myappdb;
+    CREATE USER IF NOT EXISTS 'mysquluser'@'%' IDENTIFIED BY 'mysqoonpassword';
+    GRANT ALL PRIVILEGES ON myappdb.* TO 'mysquluser'@'%';
+    FLUSH PRIVILEGES;
