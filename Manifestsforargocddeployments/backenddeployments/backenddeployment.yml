@@ -19,6 +19,10 @@ spec:
       labels:
         app: backend
     spec:
+      initContainers:                # 👈 initContainer goes here
+        - name: wait-for-mysql
+          image: busybox
+          command: ['sh', '-c', 'until nc -z mysql-service 3306; do echo waiting for mysql; sleep 5; done']
       containers:
         - name: backend
           image: harshakoppu945/fsbackend:v2
