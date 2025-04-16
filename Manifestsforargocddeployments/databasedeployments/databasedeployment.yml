@@ -36,6 +36,11 @@ spec:
                 secretKeyRef:
                   name: db-secrets
                   key: mysql_password
+            - name: MYSQL_ROOT_PASSWORD  # Adding the root password here
+              valueFrom:
+                secretKeyRef:
+                  name: db-secrets  # You can also define the password in the secret
+                  key: mysql_root_password  # Add the root password key to your secret
           volumeMounts:
             - name: mysql-persistent-storage
               mountPath: /var/lib/mysql
