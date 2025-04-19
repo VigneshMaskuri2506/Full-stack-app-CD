@@ -6,4 +6,4 @@ metadata:
   namespace: fullstack
 data:
   mysql_database: "myappdb"  # Used by MySQL container to initialize DB
-  DB_URL: "jdbc:mysql://mysql-service:3306/myappdb"  # Used by Spring Boot app
+  DB_URL: "jdbc:mysql://mysql-service.fullstack.svc.cluster.local:3306/myappdb"   # Used by Spring Boot app and backend pod uses mysql service to connect to DB  
