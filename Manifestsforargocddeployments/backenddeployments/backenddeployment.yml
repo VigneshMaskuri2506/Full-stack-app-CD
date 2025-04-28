@@ -51,13 +51,13 @@ spec:
                   key: mysql_password
           livenessProbe:
             httpGet:
-              path: /health
+              path: /actuator/health
               port: 8080
             initialDelaySeconds: 40
             periodSeconds: 15
           readinessProbe:
             httpGet:
-              path: /ready
+              path: /actuator/health
               port: 8080
             initialDelaySeconds: 40
             periodSeconds: 15
