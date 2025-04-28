@@ -9,6 +9,7 @@ spec:
     app: frontend
   ports:
     - protocol: TCP
-      port: 80
-      targetPort: 80
-  type: ClusterIP
+      port: 80            # Service port
+      targetPort: 80      # Container port
+      nodePort: 30080     # Fixed NodePort (optional, else K8s will assign random between 30000-32767)
+  type: NodePort
